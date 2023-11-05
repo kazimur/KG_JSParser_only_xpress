@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           KG_JSParser_only_xpress
-// @version        1.0.1
+// @version        1.0.2
 // @namespace      klavogonki
 // @author         NIN, kazimur
 // @description    Скрипт-парсер для Клавогонок
@@ -323,7 +323,7 @@ const default_rules = (function() {
 		table.items(table).forEach((x) => table[x[0]]["rewards_accuracy"]=0);
 		table.items(table).forEach((x) => table[x[0]]["rewards_total"]=0);
 
-		let sort_func = (x) => x[1]["points"]+(x[1]["avg_speed_short"]+x[1]["avg_speed_usual"])/5000;
+		let sort_func = (x) => x[1]["points"]+(x[1]["avg_speed_short"] || 0 + x[1]["avg_speed_usual"] || 0)/5000;
 		let orig_table = {};
 		Object.assign(orig_table, table);
 		let html1 = table.render_default_table_view(table, sort_func, rule_xpress1.columns(table));
@@ -1524,7 +1524,7 @@ async function calc() {
 	table.gen_default_pers_chat = gen_default_pers_chat;
 
 	let columns = rules[current_rule].columns(table);
-	let sort_func = (x) => x[1]["points"]+(x[1]["avg_speed_short"]+x[1]["avg_speed_usual"])/5000;
+	let sort_func = (x) => x[1]["points"]+(x[1]["avg_speed_short"] || 0 + x[1]["avg_speed_usual"] || 0)/5000;
 	if (rules[current_rule].hasOwnProperty("sort_func")) {
 		sort_func = rules[current_rule].sort_func;
 	}
