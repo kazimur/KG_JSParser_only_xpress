@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           KG_JSParser_only_xpress
-// @version        1.0.2
+// @version        1.0.3
 // @namespace      klavogonki
 // @author         NIN, kazimur
 // @description    Скрипт-парсер для Клавогонок
@@ -1057,14 +1057,14 @@ function split_player_strings(s) {
 }
 
 function parse_name(s) {
-	let m = s.match(/onmouseout=\"hideProfilePopup\([0-9]*\);\">(.*?)<\/a>/);
+	let m = s.match(/onmouseout=\"hideProfilePopup\([0-9]*\);.*?\">(.*?)<\/a>/);
 	if (m)
 		return m[1];
 	return null;
 }
 
 function parse_id(s) {
-	let m = s.match(/onmouseout=\"hideProfilePopup\(([0-9]*)\);\">/);
+	let m = s.match(/onmouseout=\"hideProfilePopup\(([0-9]*)\);.*?\">/);
 	if (m)
 		return m[1];
 	return null;
