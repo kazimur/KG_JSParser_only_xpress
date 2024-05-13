@@ -862,8 +862,8 @@ function calc_save() {
 	let r = document.getElementById("kgjs_radios_form").kgjs_rules.value;
 	settings.selected_rule = r;
 	saveSettings();
-    let ids = document.getElementById("kgjs_xpress_banned_ids").value;
-    kgjs_banned_ids = ids.split(",").map((id) => id.trim());
+	let ids = document.getElementById("kgjs_xpress_banned_ids").value;
+	kgjs_banned_ids = ids.split(",").map((id) => id.trim());
 	calc();
 };
 
