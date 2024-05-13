@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           KG_JSParser_only_xpress
-// @version        1.0.3
+// @version        1.0.4
 // @namespace      klavogonki
 // @author         NIN, kazimur
 // @description    Скрипт-парсер для Клавогонок
@@ -13,6 +13,7 @@
 let kgjs_pers_messages = {};
 let kgjs_inter_results = [];
 let kgjs_total_results = [];
+let kgjs_banned_ids = [];
 let parse_zip = false;
 
 if (!(location.href.match(/^https?:\/\/klavogonki\.ru\/jsparser.*$/))) return;
@@ -831,6 +832,7 @@ mainelem.innerHTML = ""+
 '<div>'+//<button id="kgjs_btn_hide_table">Hide/Show</button>
 '<button id="kgjs_btn_calc">Calc</button>'+
 '<button id="kgjs_btn_gen_image">Gen Image</button>'+
+'<input type="text" placeholder="Banned IDs" value="" id="kgjs_xpress_banned_ids">'+
 '</div>'+
 ''+
 '<div>'+
@@ -860,6 +862,8 @@ function calc_save() {
 	let r = document.getElementById("kgjs_radios_form").kgjs_rules.value;
 	settings.selected_rule = r;
 	saveSettings();
+    let ids = document.getElementById("kgjs_xpress_banned_ids").value;
+    kgjs_banned_ids = ids.split(",").map((id) => id.trim());
 	calc();
 };
 
@@ -1286,6 +1290,8 @@ async function parse() {
 				data["award_mileage"] = parse_award_mileage(s);
 				data["time"] = parse_time(s);
 				data["game_number"] = table.num_games;
+
+				if (kgjs_banned_ids.includes(data["id"])) continue;
 
 				if (!players_in_this_race.includes(data["name"])) {
 					table.add_data(data);
