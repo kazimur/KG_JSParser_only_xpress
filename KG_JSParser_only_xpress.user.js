@@ -1309,6 +1309,12 @@ async function parse() {
 
 		}
 	}
+
+	let players = Object.keys(table).filter((key) => !Number.isNaN(parseInt(key)));
+	for (let n = 0; n < table.num_games; n++) {
+		players.filter((p) => table[p]["place"][n] != null).sort((a, b) => table[a]["place"][n] - table[b]["place"][n]).forEach((p, i) => table[p]["place"][n] = i + 1);
+	}
+
 	table.add_missing_last_games();
 	table.calc_avg();
 	result["table"] = table;
