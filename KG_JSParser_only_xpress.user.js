@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           KG_JSParser_only_xpress
-// @version        1.0.4
+// @version        1.0.5
 // @namespace      klavogonki
 // @author         NIN, kazimur
 // @description    Скрипт-парсер для Клавогонок
