@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           KG_JSParser_only_xpress
-// @version        1.0.5
+// @version        1.0.6
 // @namespace      klavogonki
 // @author         NIN, kazimur
 // @description    Скрипт-парсер для Клавогонок
@@ -1292,6 +1292,7 @@ async function parse() {
 				data["game_number"] = table.num_games;
 
 				if (kgjs_banned_ids.includes(data["id"])) continue;
+				if (data["speed"] < 200) continue;
 
 				if (!players_in_this_race.includes(data["name"])) {
 					table.add_data(data);
